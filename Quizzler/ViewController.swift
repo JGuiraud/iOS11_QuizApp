@@ -51,8 +51,16 @@ class ViewController: UIViewController {
         if questionNumber <= allQuestions.list.count - 1 {
             questionLabel.text = allQuestions.list[questionNumber].questionText
         } else {
-            print("End of quizz")
-            questionNumber = 0
+
+            let alert = UIAlertController(title: "Awesome", message: "You've finished all the questions, do you want to start over?", preferredStyle: .alert)
+            
+            let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (action) in
+                self.startOver()
+            })
+            alert.addAction(restartAction)
+            
+            present(alert, animated: true, completion: nil)
+            
         }
     }
     
@@ -68,6 +76,8 @@ class ViewController: UIViewController {
     
     
     func startOver() {
+        questionNumber = 0
+        nextQuestion()
     }
     
 
