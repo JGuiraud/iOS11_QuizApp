@@ -10,8 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let allQuestions = QuestionBank()
-    var pickedAnswer : Bool = false
+    let allQuestions = QuestionBank() //
+    var pickedAnswer : Bool = false //By default, the picked answer is 0, false.
+    var questionNumber : Int = 0 //follows the state of the app, i.e. the question we're on.
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -30,37 +31,39 @@ class ViewController: UIViewController {
     @IBAction func answerPressed(_ sender: AnyObject) {
         if sender.tag == 1 {
             pickedAnswer = true
+
         } else if sender.tag == 2 {
             pickedAnswer = false
         }
-        checkAnswer()
+
+        if questionNumber != allQuestions.list.count - 1 {
+            questionNumber += 1
+            nextQuestion()
+            checkAnswer()
+        }
     }
     
     func updateUI() {
-      
+        
     }
     
 
     func nextQuestion() {
-        
+        questionLabel.text = allQuestions.list[questionNumber].questionText
     }
     
     
     func checkAnswer() {
-        
-        let correctAnswer = allQuestions.list[0].answer
-        
+        let correctAnswer = allQuestions.list[questionNumber].answer
         if correctAnswer == pickedAnswer {
             print("You got it")
         } else {
             print("Wrong!")
         }
-        
     }
     
     
     func startOver() {
-       
     }
     
 
