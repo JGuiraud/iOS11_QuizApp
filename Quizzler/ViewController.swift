@@ -35,12 +35,11 @@ class ViewController: UIViewController {
         } else if sender.tag == 2 {
             pickedAnswer = false
         }
+        
+        checkAnswer()
+        questionNumber += 1
+        nextQuestion()
 
-        if questionNumber != allQuestions.list.count - 1 {
-            questionNumber += 1
-            nextQuestion()
-            checkAnswer()
-        }
     }
     
     func updateUI() {
@@ -49,7 +48,12 @@ class ViewController: UIViewController {
     
 
     func nextQuestion() {
-        questionLabel.text = allQuestions.list[questionNumber].questionText
+        if questionNumber <= allQuestions.list.count - 1 {
+            questionLabel.text = allQuestions.list[questionNumber].questionText
+        } else {
+            print("End of quizz")
+            questionNumber = 0
+        }
     }
     
     
