@@ -16,8 +16,8 @@ class Question {
     init(text: String, correctAnswer: Bool) {
         questionText = text
         answer = correctAnswer
-        
     }
+    
 }
 
 
